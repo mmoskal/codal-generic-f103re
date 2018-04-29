@@ -76,9 +76,9 @@ PROCESSOR_WORD_TYPE fiber_initial_stack_base()
 {
     uint32_t mbed_stack_base;
 
-#ifdef MBED_CONF_RTOS_PRESENT_X
-    extern osThreadDef_t os_thread_def_main;
-    mbed_stack_base = (uint32_t)os_thread_def_main.stack_pointer + os_thread_def_main.stacksize;
+#ifdef MBED_CONF_RTOS_PRESENT
+    auto thr = (os_thread_t*)osThreadGetId();
+    mbed_stack_base = (uint32_t)thr->stack_mem + thr->stack_size;
 #else
     mbed_stack_base = DEVICE_STACK_BASE;
 #endif

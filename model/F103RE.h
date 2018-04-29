@@ -46,10 +46,6 @@ DEALINGS IN THE SOFTWARE.
 #include "F103REIO.h"
 #include "CodalFiber.h"
 #include "MessageBus.h"
-#include "F103REDisplay.h"
-#include "F103RETemperatureSensor.h"
-#include "F103RELightSensor.h"
-#include "MMA8453.h"
 
 // Status flag values
 #define DEVICE_INITIALIZED                    0x01

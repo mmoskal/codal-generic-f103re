@@ -50,13 +50,14 @@ public:
     STM32SPI(codal::Pin &mosi, codal::Pin &miso, codal::Pin &sclk);
 
     /**
-     * Writes a given command to SPI bus, and afterwards reads the response. Finally, calls
-     * doneHandler (possibly in IRQ context).
+     * Writes and reads from the SPI bus concurrently. Finally, calls doneHandler (possibly in IRQ context).
      *
-     * Note that bytes recieved while sending command are ignored.
+     * Either buffer can be NULL.
      */
-    virtual int startTransfer(const uint8_t *command, uint32_t commandSize, uint8_t *response,
-                              uint32_t responseSize, PVoidCallback doneHandler, void *arg);
+    virtual int startTransfer(const uint8_t *txBuffer, uint32_t txSize, uint8_t *rxBuffer,
+                         uint32_t rxSize, PVoidCallback doneHandler, void *arg);
+
+
 };
 }
 

@@ -76,10 +76,13 @@ PROCESSOR_WORD_TYPE fiber_initial_stack_base()
 {
     uint32_t mbed_stack_base;
 
-#ifdef MBED_CONF_RTOS_PRESENT
+#ifdef MBED_CONF_RTOS_PRESENT_DOESNT_WORK
+    // this doesn't seem to work
     auto thr = (os_thread_t*)osThreadGetId();
     mbed_stack_base = (uint32_t)thr->stack_mem + thr->stack_size;
+    DMESG("stack: %p + %d = %p", thr->stack_mem, thr->stack_size, mbed_stack_base);
 #else
+    // but this does - the stack seems to be 320 bytes
     mbed_stack_base = DEVICE_STACK_BASE;
 #endif
 
